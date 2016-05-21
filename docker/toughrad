@@ -70,10 +70,7 @@ restart()
 upgrade()
 {
     echo 'starting upgrade...'
-    cd ${appdir} 
-    git fetch origin stable_v1
-    git checkout stable_v1
-    git pull origin stable_v1
+    cd ${appdir} && git checkout master && git pull origin master
     supervisorctl restart radiusd
     supervisorctl restart admin
     supervisorctl restart customer
