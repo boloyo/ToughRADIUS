@@ -17,8 +17,8 @@ def process(req=None,resp=None,user=None,radiusd=None,**kwargs):
             return error_auth(resp, 'user password not match')
         
     if user['status'] == 4:
-        resp['Framed-Pool'] = store.get_param("expire_addrpool")
-        return resp
+        # resp['Framed-Pool'] = store.get_param("expire_addrpool")
+        return error_auth(resp,'user is expired')
 
     if  user['status'] in (0,2,3):
         return error_auth(resp,'user status not ok')

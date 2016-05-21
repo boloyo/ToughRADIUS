@@ -15,8 +15,9 @@ def process(req=None,resp=None,user=None,radiusd=None,**kwargs):
     acct_policy = user['product_policy'] or PPMonth
     if acct_policy in ( PPMonth,BOMonth):
         if utils.is_expire(user['expire_date']):
-            resp['Framed-Pool'] = store.get_param("expire_addrpool")
-            
+            return error_auth(resp,'user expired')
+            # resp['Framed-Pool'] = store.get_param("expire_addrpool")
+
     elif acct_policy in (PPTimes,PPFlow):
         user_balance = store.get_user_balance(user['account_number'])
         if user_balance <= 0:
